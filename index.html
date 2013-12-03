@@ -5,15 +5,18 @@
     <title>ArcGIS Application Boilerplate</title>
     <meta charset="utf-8">
     <!--Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol-->
-    <link rel="stylesheet" href="//js.arcgis.com/3.7compact/js/dojo/dijit/themes/claro/claro.css">
     <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7compact/js/esri/css/esri.css">
     <!--Load any application specific styles-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
-<body class="claro">
+<body class="">
     <!--The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
     <div id="mapDiv" dir="ltr"></div>
+    <div id="controls">
+        <h2>Busser i dette område</h2>
+        <form id="buslist"></form>
+    </div>
     <script type="text/javascript">
     var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
     var dojoConfig = {
@@ -28,7 +31,7 @@
         }]
     };
     </script>
-    <script type="text/javascript" src="//js.arcgis.com/3.7/"></script>
+    <script type="text/javascript" src="//js.arcgis.com/3.7compact/"></script>
     <script type="text/javascript">
     require([
         "dojo/on",

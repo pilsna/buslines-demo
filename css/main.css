@@ -20,3 +20,14 @@ html, body {
     stroke-opacity: 0.8;
     stroke-width: 8px;
 }
+
+#controls {
+	position: fixed;
+	top: 50px;
+	right:50px;
+	min-width: 200px;
+	min-height: 100px;
+	z-index: 10;
+	background: white;
+	padding: 20px;
+}

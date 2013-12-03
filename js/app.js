@@ -22,7 +22,8 @@ define([
             for (var i = error.target.graphics.length - 1; i >= 0; i--) {
                 var rute = error.target.graphics[i].attributes;
                 if (rute.HovedVaria !== 0) {
-                    console.log(rute.Designate + ", " + rute.DirectionC + ", " + rute.HovedVaria);
+                    console.log(rute.Designate + ", " + rute.DirectionC);
+                    var form = document.getElementById("buslist");
                 }
             };
         }
@@ -38,17 +39,21 @@ define([
                 ready(lang.hitch(this, function() {
                     this._setupGraphics();
                     this._addListeners();
+                    this._infoTemplate();
                 }));
 
             },
             _setupGraphics: function() {
                 var graphicslayer = this.map.graphics;
                 graphicslayer.styling = false;
-                on(graphicslayer, "graphic-draw", handleevent);
-                graphicslayer.className = 'graphics-highlight';
+                //on(graphicslayer, "graphic-draw", handleevent);
+                //graphicslayer.className = 'graphics-highlight';
             },
             _addListeners: function() {
                 on(this.busLayer, 'update-end', extentUpdated);
+            },
+            _infoTemplate: function() {
+
             }
         });
     });
