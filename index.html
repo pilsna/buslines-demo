@@ -8,14 +8,23 @@
     <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7compact/js/esri/css/esri.css">
     <!--Load any application specific styles-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type='text/javascript' src='http:////cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js'></script>
 </head>
 
-<body class="">
+<body class="" >
     <!--The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
     <div id="mapDiv" dir="ltr"></div>
-    <div id="controls">
+    <div class="controls" >
         <h2>Busser i dette område</h2>
-        <form id="buslist"></form>
+        <div id="busCheckboxList" class="checkboxList" data-bind="template: { name: 'busCheckboxListItem-template', foreach: items }"></div>
+        <p data-bind="text: selectedItemsDelim"></p>
+        <script type="text/html" id="busCheckboxListItem-template">
+                <div><label>
+                    <input type="checkbox" data-bind="value: id, checked: $root.selectedItems" />
+                    <span data-bind="text: name"></span> 
+                </label></div>
+        </script>
     </div>
     <script type="text/javascript">
     var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
