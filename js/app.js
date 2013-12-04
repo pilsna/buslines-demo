@@ -18,18 +18,6 @@ define([
 
         }
 
-        function extentUpdated(error, info) {
-            for (var i = error.target.graphics.length - 1; i >= 0; i--) {
-                var rute = error.target.graphics[i].attributes;
-                var form = document.getElementById("buslist");
-
-                if (rute.HovedVaria !== 0) {
-                    console.log(rute.Designate + ", " + rute.DirectionC);
-
-                }
-            };
-        }
-
         function addToGraphics(graphic) {
             console.log(graphic);
         }
@@ -53,28 +41,46 @@ define([
 
             },
             _bind: function() {
-                var lines = [
-                    { name: "1A", id: 1},
-                    { name: '150S', id: 2},
-                    { name: '4A', id: 3},
-                    { name: '18', id: 4}
-                ];
-                this.busList = new busdemo.BusLinesModel(addToGraphics);
-                
-                //ko.bindingHandlers['pick'] = busdemo.checkHandler(addToGraphics);
-                ko.applyBindings(this.busList);
-                this.busList.replaceLines(lines);
+                var lines = [{
+                    name: "1A",
+                    id: 1
+                }, {
+                    name: '150S',
+                    id: 2
+                }, {
+                    name: '4A',
+                    id: 3
+                }, {
+                    name: '18',
+                    id: 4
+                }];
+                var busList = new busdemo.BusLinesModel(addToGraphics);
 
+                //ko.bindingHandlers['pick'] = busdemo.checkHandler(addToGraphics);
+                ko.applyBindings(busList);
+                //busList.replaceLines(lines);
+                window.busdemo.current = busList;
             },
             _setupGraphics: function() {
                 var graphicslayer = this.map.graphics;
                 graphicslayer.styling = false;
             },
             _addListeners: function() {
-                on(this.busLayer, 'update-end', extentUpdated);
+                on(this.busLayer, 'update-end', this.extentUpdated);
             },
             _infoTemplate: function() {
 
+            },
+            extentUpdated: function(error, info) {
+                this.busdemo.current.replaceLines(error.target.graphics);
+                for (var i = error.target.graphics.length - 1; i >= 0; i--) {
+                    var rute = error.target.graphics[i].attributes;
+                    if (rute.HovedVaria !== 0) {
+                        console.log(rute.Designate + ", " + rute.DirectionC);
+
+                    }
+                };
             }
+
         });
     });

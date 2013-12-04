@@ -29,9 +29,9 @@ window.busdemo = {};
         	var newLines = [];
             for (var i = 0; i < graphics.length; i++) {
                 var graphic = graphics[i];
-                var bus = new busdemo.BusLine(graphic.name, highlightOnMap);
+                var bus = new busdemo.BusLine(graphic.attributes.Designate, highlightOnMap);
                 ko.utils.extend(bus, graphic);
-                bus.attributes = { OBJECTID: graphic.id};
+                //bus.attributes = { OBJECTID: graphic.id};
                 var oldBus = self.getById(bus.attributes.OBJECTID);
                 if (oldBus) {
                     bus.selected = oldBus.selected;

@@ -51,5 +51,6 @@ div {
 	border-right-width: 0px;
 	border-bottom-width: 0px;
 	vertical-align: middle;
-	padding: 6px;
+	padding: 2px;
+	font-size: 10px;
 }
