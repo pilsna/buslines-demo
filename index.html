@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7compact/js/esri/css/esri.css">
     <!--Load any application specific styles-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script type='text/javascript' src='http:////cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-    <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js'></script>
+    <script type="text/javascript" src="js/knockout-2.3.0.debug.js"></script>
+    <script type="text/javascript" src="js/busdemo.js"></script>
 </head>
 
 <body class="" >
@@ -17,13 +17,14 @@
     <div id="mapDiv" dir="ltr"></div>
     <div class="controls" >
         <h2>Busser i dette område</h2>
-        <div id="busCheckboxList" class="checkboxList" data-bind="template: { name: 'busCheckboxListItem-template', foreach: items }"></div>
-        <p data-bind="text: selectedItemsDelim"></p>
+        <div id="busCheckboxList" class="checkboxList" data-bind="template: { name: 'busCheckboxListItem-template', foreach: busLineCollection }"></div>
         <script type="text/html" id="busCheckboxListItem-template">
-                <div><label>
-                    <input type="checkbox" data-bind="value: id, checked: $root.selectedItems" />
+            <label>
+                <div class="listitem" data-bind="value: selected, css: { 'selected': selected }">
+                    <input type="checkbox" data-bind="value: name, checked: selected, pick: $parent" />
                     <span data-bind="text: name"></span> 
-                </label></div>
+                </div>
+            </label>
         </script>
     </div>
     <script type="text/javascript">

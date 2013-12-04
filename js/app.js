@@ -30,6 +30,10 @@ define([
             };
         }
 
+        function addToGraphics(graphic) {
+            console.log(graphic);
+        }
+
         return declare("", null, {
             map: {},
             constructor: function(map) {
@@ -49,35 +53,22 @@ define([
 
             },
             _bind: function() {
-                var MyViewModel = function() {
-                    this.items = ko.observableArray([{
-                        name: "Red",
-                        id: 0,
-                        isChecked: true
-                    }, {
-                        name: "Blue",
-                        id: 1,
-                        isChecked: false
-                    }, {
-                        name: "Green",
-                        id: 2,
-                        isChecked: true
-                    }]);
-                    this.selectedItems = ko.observableArray();
-                }
-                var viewModel = null;
-                viewModel = new MyViewModel();
-                viewModel.selectedItemsDelim = ko.dependentObservable(function() {
-                    return viewModel.selectedItems().join(",");
-                });
-                ko.applyBindings(viewModel);
+                var lines = [
+                    { name: "1A", id: 1},
+                    { name: '150S', id: 2},
+                    { name: '4A', id: 3},
+                    { name: '18', id: 4}
+                ];
+                this.busList = new busdemo.BusLinesModel(addToGraphics);
+                
+                //ko.bindingHandlers['pick'] = busdemo.checkHandler(addToGraphics);
+                ko.applyBindings(this.busList);
+                this.busList.replaceLines(lines);
 
             },
             _setupGraphics: function() {
                 var graphicslayer = this.map.graphics;
                 graphicslayer.styling = false;
-                //on(graphicslayer, "graphic-draw", handleevent);
-                //graphicslayer.className = 'graphics-highlight';
             },
             _addListeners: function() {
                 on(this.busLayer, 'update-end', extentUpdated);
