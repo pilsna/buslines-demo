@@ -10,6 +10,9 @@ window.busdemo = {};
         self.notselected = ko.computed(function(){
         	return !self.selected();
         });
+        self.cssclass = ko.computed(function(){
+        	return self.selected() ? 'selected': 'notselected';
+        });
         self.name = name;
         self.checkChanged = function(newValue) {
             highlightOnMap(self);
