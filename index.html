@@ -20,7 +20,7 @@
         <div id="busCheckboxList" class="checkboxList" data-bind="template: { name: 'busCheckboxListItem-template', foreach: busLineCollection }"></div>
         <script type="text/html" id="busCheckboxListItem-template">
             <label>
-                <div class="listitem" data-bind="value: selected, css: { 'selected': selected }">
+                <div class="listitem" data-bind="value: selected, css: { 'selected': selected, 'notselected':notselected }">
                     <input type="checkbox" data-bind="value: name, checked: selected, pick: $parent" />
                     <span data-bind="text: name"></span> 
                 </div>

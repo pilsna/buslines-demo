@@ -4,7 +4,8 @@ define([
         "dojo/_base/lang",
         "dojo/on",
         "esri/symbols/SimpleLineSymbol",
-        "esri/renderers/SimpleRenderer"
+        "esri/renderers/SimpleRenderer",
+        "esri/graphic"
     ],
     function(
         ready,
@@ -12,7 +13,8 @@ define([
         lang,
         on,
         SimpleLineSymbol,
-        SimpleRenderer
+        SimpleRenderer,
+        Graphic
     ) {
 
         return declare("", null, {
@@ -42,7 +44,7 @@ define([
             },
             _addListeners: function() {
                 on(this.busLayer, 'update-end', this.extentUpdated);
-                on(this.map, 'zoom-end', function(extent, zoomfactor, anchor, level){
+                on(this.map, 'zoom-end', function(extent, zoomfactor, anchor, level) {
                     //this.map.graphics.refresh();
                 });
             },
@@ -50,20 +52,31 @@ define([
 
             },
             _changeGraphic: function(busLine) {
-                console.log(busLine.graphic);
-                if (busLine.selected()) {
+                //console.log(busLine.graphic);
+                //this.busdemo.current.replaceLines(event.target.graphics);
+                var busLines = this.busdemo.current.selectedLines();
+                this.busdemo.map.graphics.clear()
+                for (var i = 0; i < busLines.length; i++) {
+                    var g = busLines[i].graphic;
+                    if (g) {
+                        var highlight = new Graphic(g.geometry);
+                        this.busdemo.map.graphics.add(highlight);
+                    }
+                };
+                /* if (busLine.selected()) {
                     this.busdemo.map.graphics.add(busLine.graphic);
                     this.busdemo.map.graphics.refresh();
                 } else {
                     this.busdemo.map.graphics.remove(busLine.graphic);
-                }
+                }*/
             },
             extentUpdated: function(event) {
                 this.busdemo.current.replaceLines(event.target.graphics);
                 var busLines = this.busdemo.current.selectedLines();
                 event.target._map.graphics.clear()
                 for (var i = 0; i < busLines.length; i++) {
-                    event.target._map.graphics.add(busLines[i].graphic);
+                    var highlight = new Graphic(busLines[i].graphic.geometry);
+                    event.target._map.graphics.add(highlight);
                 };
             }
 

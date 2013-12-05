@@ -7,6 +7,9 @@ window.busdemo = {};
     function BusLine(name, highlightOnMap, selected) {
         var self = this;
         self.selected = ko.observable(selected);
+        self.notselected = ko.computed(function(){
+        	return !self.selected();
+        });
         self.name = name;
         self.checkChanged = function(newValue) {
             highlightOnMap(self);

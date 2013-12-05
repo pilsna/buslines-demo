@@ -22,7 +22,7 @@ div {
     /*Example of a rule that will be applied if the app is viewed in a browser wtih a RTL locale like Hebrew or Arabic.*/
 }
 #mapDiv_graphics_layer path {
-    stroke: hotpink;
+    stroke: #FF69B4;
     /* #c03241;*/
     stroke-opacity: 0.8;
     stroke-width: 8px;
@@ -34,23 +34,33 @@ div {
     right:50px;
     min-width: 200px;
     min-height: 100px;
+    max-width: 300px;
     z-index: 20;
     background: white;
-    padding: 0px;
+    padding: 5px;
     box-shadow: 4px 4px 8px rgba(50, 50, 50, 0.85);
     border-radius: 2px;
 }
 .selected {
-	background-color: #96a2c0;
+	background-color: #FF69B4;
 }
+.notselected {
+	background-color: #4f81bd;
+}
+
 .listitem {
-	border-color: grey;
+/*	border-color: grey;
 	border-style: solid;
 	border-top-width: 1px;
 	border-left-width: 0px;
 	border-right-width: 0px;
-	border-bottom-width: 0px;
+	border-bottom-width: 0px; */
 	vertical-align: middle;
 	padding: 2px;
-	font-size: 10px;
+	margin: 4px;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	float:left;
+	width: 30%;
 }
