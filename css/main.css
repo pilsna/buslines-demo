@@ -31,8 +31,8 @@ div {
     position: fixed;
     top: 50px;
     right:50px;
-    min-width: 200px;
-    min-height: 100px;
+    min-width: 300px;
+    min-height: 300px;
     max-width: 300px;
     max-height: 90%;
     z-index: 20;
@@ -43,6 +43,8 @@ div {
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
+    visibility: hidden;
+    padding-bottom: 30px;
 }
 .selected {
 	background-color: #FF69B4 !important;

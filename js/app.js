@@ -29,14 +29,13 @@ define([
                     this._setupGraphics();
                     this._addListeners();
                     this._infoTemplate();
-
                 }));
-
             },
             _bind: function() {
                 var busList = new busdemo.BusLinesModel(this._changeGraphic);
                 ko.applyBindings(busList);
                 window.busdemo.current = busList;
+                document.getElementById("linecontrol").style.visibility = "visible"
             },
             _setupGraphics: function() {
                 var graphicslayer = this.map.graphics;
@@ -44,16 +43,11 @@ define([
             },
             _addListeners: function() {
                 on(this.busLayer, 'update-end', this.extentUpdated);
-                on(this.map, 'zoom-end', function(extent, zoomfactor, anchor, level) {
-                    //this.map.graphics.refresh();
-                });
             },
             _infoTemplate: function() {
 
             },
             _changeGraphic: function(busLine) {
-                //console.log(busLine.graphic);
-                //this.busdemo.current.replaceLines(event.target.graphics);
                 var busLines = this.busdemo.current.selectedLines();
                 this.busdemo.map.graphics.clear()
                 for (var i = 0; i < busLines.length; i++) {
@@ -63,12 +57,6 @@ define([
                         this.busdemo.map.graphics.add(highlight);
                     }
                 };
-                /* if (busLine.selected()) {
-                    this.busdemo.map.graphics.add(busLine.graphic);
-                    this.busdemo.map.graphics.refresh();
-                } else {
-                    this.busdemo.map.graphics.remove(busLine.graphic);
-                }*/
             },
             extentUpdated: function(event) {
                 this.busdemo.current.replaceLines(event.target.graphics);

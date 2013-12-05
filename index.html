@@ -15,7 +15,7 @@
 <body class="" >
     <!--The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
     <div id="mapDiv" dir="ltr"></div>
-    <div class="controls" >
+    <div id="linecontrol" class="controls" >
         <h2>Linjer i området</h2>
         <div id="busCheckboxList" class="checkboxList" data-bind="template: { name: 'busCheckboxListItem-template', foreach: busLineCollection }"></div>
         <script type="text/html" id="busCheckboxListItem-template">
@@ -26,7 +26,6 @@
                 </div>
             </label>
         </script>
-        <br />
     </div>
     <script type="text/javascript">
     var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
