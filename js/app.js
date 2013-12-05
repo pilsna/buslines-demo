@@ -14,23 +14,14 @@ define([
         SimpleLineSymbol,
         SimpleRenderer
     ) {
-        function handleevent(event, node) {
-
-        }
-
-        function addToGraphics(graphic) {
-            console.log(graphic);
-        }
 
         return declare("", null, {
             map: {},
             constructor: function(map) {
-                //config will contain application and user defined info for the template such as i18n strings, the web map id
-                // and application id
-                // any url parameters and any application specific configuration information. 
                 this.map = map;
                 this.busLayer = this.map.getLayersVisibleAtScale()[1];
                 this._bind();
+                window.busdemo.map = map;
 
                 ready(lang.hitch(this, function() {
                     this._setupGraphics();
@@ -41,24 +32,8 @@ define([
 
             },
             _bind: function() {
-                var lines = [{
-                    name: "1A",
-                    id: 1
-                }, {
-                    name: '150S',
-                    id: 2
-                }, {
-                    name: '4A',
-                    id: 3
-                }, {
-                    name: '18',
-                    id: 4
-                }];
-                var busList = new busdemo.BusLinesModel(addToGraphics);
-
-                //ko.bindingHandlers['pick'] = busdemo.checkHandler(addToGraphics);
+                var busList = new busdemo.BusLinesModel(this._changeGraphic);
                 ko.applyBindings(busList);
-                //busList.replaceLines(lines);
                 window.busdemo.current = busList;
             },
             _setupGraphics: function() {
@@ -67,18 +42,28 @@ define([
             },
             _addListeners: function() {
                 on(this.busLayer, 'update-end', this.extentUpdated);
+                on(this.map, 'zoom-end', function(extent, zoomfactor, anchor, level){
+                    //this.map.graphics.refresh();
+                });
             },
             _infoTemplate: function() {
 
             },
-            extentUpdated: function(error, info) {
-                this.busdemo.current.replaceLines(error.target.graphics);
-                for (var i = error.target.graphics.length - 1; i >= 0; i--) {
-                    var rute = error.target.graphics[i].attributes;
-                    if (rute.HovedVaria !== 0) {
-                        console.log(rute.Designate + ", " + rute.DirectionC);
-
-                    }
+            _changeGraphic: function(busLine) {
+                console.log(busLine.graphic);
+                if (busLine.selected()) {
+                    this.busdemo.map.graphics.add(busLine.graphic);
+                    this.busdemo.map.graphics.refresh();
+                } else {
+                    this.busdemo.map.graphics.remove(busLine.graphic);
+                }
+            },
+            extentUpdated: function(event) {
+                this.busdemo.current.replaceLines(event.target.graphics);
+                var busLines = this.busdemo.current.selectedLines();
+                event.target._map.graphics.clear()
+                for (var i = 0; i < busLines.length; i++) {
+                    event.target._map.graphics.add(busLines[i].graphic);
                 };
             }
 
