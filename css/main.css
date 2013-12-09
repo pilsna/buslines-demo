@@ -57,9 +57,11 @@ div {
 	vertical-align: middle;
 	padding: 2px;
 	margin: 4px;
+	margin-left: 10px;
+	margin-right: 10px;
 	font-size: 14px;
 	font-weight: bold;
 	color: white;
 	float:left;
-	width: 30.5%;
+	width: 25%;
 }
