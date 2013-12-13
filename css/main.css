@@ -3,14 +3,14 @@ html, body {
     margin:0;
     height:100%;
     width:100%;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h2 {
-	padding: 10px;
-	margin: 10px;
+    padding: 10px;
+    margin: 10px;
 }
 div {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 #mapDiv {
     padding:0;
@@ -27,7 +27,7 @@ div {
     stroke-width: 8px;
 }
 .controls {
-	border: 1px solid black;
+    border: 1px solid black;
     position: fixed;
     top: 50px;
     right:50px;
@@ -47,21 +47,20 @@ div {
     padding-bottom: 30px;
 }
 .selected {
-	background-color: #FF69B4 !important;
+    background-color: #FF69B4 !important;
 }
 .notselected {
-	background-color: #4f81bd;
+    background-color: #4f81bd;
 }
-
 .listitem {
-	vertical-align: middle;
-	padding: 2px;
-	margin: 4px;
-	margin-left: 10px;
-	margin-right: 10px;
-	font-size: 14px;
-	font-weight: bold;
-	color: white;
-	float:left;
-	width: 25%;
+    vertical-align: middle;
+    padding: 2px;
+    margin: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    float:left;
+    width: 25%;
 }
